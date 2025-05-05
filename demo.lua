@@ -40,16 +40,11 @@ print("\n")
 local function sieve(xs)
   local lst = list(xs)
 
-  if lst ~= nil then
-    return {
-      head = lst.head,
-      tail = function()
-        return sieve(filter(function(x)
-          return x % lst.head ~= 0
-        end)(tail(lst)))
-      end,
-    }
-  end
+  return createList(lst)(lst.head)(function()
+    return sieve(filter(function(x)
+      return x % lst.head ~= 0
+    end)(tail(lst)))
+  end)
 end
 
 local primes = sieve(range(2))

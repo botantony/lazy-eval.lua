@@ -96,6 +96,19 @@ function p.printList(xs)
   print(p.dump(xs))
 end
 
+function p.createList(xs)
+  return function(head_ret)
+    return function(tail_ret)
+      if xs ~= nil then
+        return {
+          head = head_ret,
+          tail = tail_ret,
+        }
+      end
+    end
+  end
+end
+
 function p.array(list)
   local xs = {}
   local head = nil
@@ -724,7 +737,7 @@ p.strconcat = function(a)
     return a .. b
   end
 end
-p.strlen = function(a)
+p.arrlen = function(a)
   return #a
 end
 
